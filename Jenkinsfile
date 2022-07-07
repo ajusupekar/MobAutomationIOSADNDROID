@@ -16,12 +16,5 @@ pipeline {
                             jsonReportDirectory:'Menta-MobAutomation-Project/target'
                 }
             }
-            stage('Send Email Notification with attachment') {
-				steps {
-						emailext body: 'testEmail',
-						subject: "Automation Report",
-                        mimeType: 'text/html',to: "ajusupekar91@gmail.com"
-					  }
-            }
   }
 }
