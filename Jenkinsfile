@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Run functional test cases') {
       steps {
-       bat "mvn -f MobAutomation-Project/pom.xml clean install -DjenkinsBrowser=${params.device} -Dcucumber.options=\"--tags ${params.tagName}\""
+       sh "mvn -f MobAutomation-Project/pom.xml clean install -DjenkinsBrowser=${params.device} -Dcucumber.options=\"--tags ${params.tagName}\""
       }
     }
     stage('Generate Cucmber Reports') {
