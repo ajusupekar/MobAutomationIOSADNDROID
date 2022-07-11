@@ -2,7 +2,7 @@ package com.cucumber.stepdefinition;
 
 import java.util.List;
 
-
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 import com.appium.utility.Constants;
@@ -1212,7 +1212,7 @@ public class ANDROIDMentaAppStepDefinition
 		}
 	}
 	
-	@Then("^android user land on (Account|Create new Password|Password updated|Enter password) screen$")
+	@Then("^android user land on (Account|Create new Password|Password updated|Enters password) screen$")
 	public void android_user_land_on_Account_screen(String optionValue) throws Throwable 
 	{
 		if(optionValue.equalsIgnoreCase("Account"))
@@ -1234,10 +1234,10 @@ public class ANDROIDMentaAppStepDefinition
 			System.out.println(Constants.key.readText(vObjPassCreatedScreen));
 			LogCapture.info("Android user is on Password Updated screen...");
 		}
-		else if(optionValue.equalsIgnoreCase("Enter password"))
+		else if(optionValue.equalsIgnoreCase("Enters password"))
 		{
-			String vObjEnterPassScreen = Constants.ANDROIDMentaOR.getProperty("EnterPassScreen");
-			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjEnterPassScreen));
+			String vObjEnterssPasswordScreen = Constants.ANDROIDMentaOR.getProperty("EnterssPasswordScreen");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjEnterssPasswordScreen));
 			LogCapture.info("Android user is on Enter Password screen...");
 		}
 	}
@@ -1347,7 +1347,7 @@ public class ANDROIDMentaAppStepDefinition
 			LogCapture.info("Android user is on Password Changed screen...");
 		}
 	}
-	
+		
 	@When("^android user enters the (Email address|new password)\"([^\"]*)\"$")
 	public void android_user_enters_the_Email_address(String optionValue , String data) throws Throwable 
 	{
@@ -1647,24 +1647,25 @@ public class ANDROIDMentaAppStepDefinition
 					
 					List<MobileElement> lists2 = Constants.key.getElementList(vObjTransactionsApproveBtnList);
 					List<MobileElement> lists1 = Constants.key.getElementList(vObjTransactionsAmountList);
-					for (i = 0; i < TransactionAmountSize; i++) 
+					for (int j = 0; j < TransactionAmountSize; j++) 
 					{
-						String val1 = lists1.get(i).getText();
+						String val1 = lists1.get(j).getText();
 						//System.out.println(val1);
 						if (val1.equalsIgnoreCase(reqAmt))
 						{
-							lists2.get(i).click();
+							lists2.get(j).click();
 							break;
 						}
 					}
 				}
 			}
+			LogCapture.info("Android user select the specified request...");
 		}
+		
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}		
-		LogCapture.info("Android user select the specified request...");
 	}
 	
 	@When("^android user click on (Linked Banks|Link Debit Card) option$")
@@ -2225,6 +2226,174 @@ public class ANDROIDMentaAppStepDefinition
 		Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjRegConfirmBtn));
 		Assert.assertEquals("PASS", Constants.key.click(vObjRegConfirmBtn));
 		LogCapture.info("Android user clicked on Confirm button...");
+	}
+	
+	/*    ACH Implementation    */
+	@When("^android user click on (Add Ach|Ach Submit) button$")
+	public void android_user_click_on_Add_Ach_button(String optionValue) throws Throwable 
+	{
+		if(optionValue.equalsIgnoreCase("Add Ach"))
+		{
+			String vObjAddAchBtn = Constants.ANDROIDMentaOR.getProperty("AddAchBtn");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAddAchBtn));
+			Assert.assertEquals("PASS", Constants.key.click(vObjAddAchBtn));
+			LogCapture.info("Android user clicked on Add Ach button...");
+		}
+		else if(optionValue.equalsIgnoreCase("Ach Submit"))
+		{
+			String vObjAchSubmitBtn = Constants.ANDROIDMentaOR.getProperty("AchSubmitBtn");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchSubmitBtn));
+			Assert.assertEquals("PASS", Constants.key.click(vObjAchSubmitBtn));
+			LogCapture.info("Android user clicked on Submit button...");
+		}
+	}
+	
+	
+	@When("^android user enters the (Identification number|Middle Name|Ach Zip Code|Ach Country Code) \"([^\"]*)\"$")
+	public void android_user_enters_the_Identification_number(String optionValue , String data) throws Throwable 
+	{
+		if(optionValue.equalsIgnoreCase("Identification number"))
+		{
+			String vObjIdentificationInput = Constants.ANDROIDMentaOR.getProperty("IdentificationInput");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjIdentificationInput));
+			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjIdentificationInput, data));
+			LogCapture.info("Android user entered Identification successfully..."+data);
+		}
+		else if(optionValue.equalsIgnoreCase("Middle Name"))
+		{
+			String vObjMiddleNameInput = Constants.ANDROIDMentaOR.getProperty("MiddleNameInput");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjMiddleNameInput));
+			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjMiddleNameInput, data));
+			LogCapture.info("Android user entered Middle Name successfully..."+data);
+		}
+		else if(optionValue.equalsIgnoreCase("Ach Zip Code"))
+		{
+			String vObjAchZipCodeInput = Constants.ANDROIDMentaOR.getProperty("AchZipCodeInput");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchZipCodeInput));
+			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjAchZipCodeInput, data));
+			LogCapture.info("Android user entered Ach Zip Code successfully..."+data);
+		}
+		else if(optionValue.equalsIgnoreCase("Ach Country Code"))
+		{
+			String vObjAchCountryCode = Constants.ANDROIDMentaOR.getProperty("AchCountryCode");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchCountryCode));
+			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjAchCountryCode, data));
+			LogCapture.info("Android user entered Ach Country Code successfully..."+data);
+		}
+	}
+	
+	@When("^android user enters the Debitors (Institution Name|Identification|Institution Identification) \"([^\"]*)\"$")
+	public void android_user_enters_the_Debitors_Institution_Name(String optionValue , String data) throws Throwable 
+	{
+		if(optionValue.equalsIgnoreCase("Institution Name"))
+		{
+			String vObjInstitutionNameInput = Constants.ANDROIDMentaOR.getProperty("InstitutionNameInput");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjInstitutionNameInput));
+			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjInstitutionNameInput, data));
+			LogCapture.info("Android user entered Institution Name successfully..."+data);
+		}
+		else if(optionValue.equalsIgnoreCase("Identification"))
+		{
+			String vObjDebitorIdentificationInput = Constants.ANDROIDMentaOR.getProperty("DebitorIdentificationInput");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjDebitorIdentificationInput));
+			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjDebitorIdentificationInput, data));
+			LogCapture.info("Android user entered Identification successfully..."+data);
+		}
+		else if(optionValue.equalsIgnoreCase("Institution Identification"))
+		{
+			String vObjInstitutionIdenInput = Constants.ANDROIDMentaOR.getProperty("InstitutionIdenInput");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjInstitutionIdenInput));
+			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjInstitutionIdenInput, data));
+			LogCapture.info("Android user entered Institution Identification successfully..."+data);
+		}
+	}
+	
+	@When("^android user enters the Reason \"([^\"]*)\"$")
+	public void android_user_enters_the_Reason(String reason) throws Throwable 
+	{
+		String vObjReasonInput = Constants.ANDROIDMentaOR.getProperty("ReasonInput");
+		Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjReasonInput));
+		Assert.assertEquals("PASS", Constants.key.writeInInput(vObjReasonInput, reason));
+		LogCapture.info("Android user entered reason successfully..."+reason);
+	}
+	
+	@When("^android user click on Save this information checkbox$")
+	public void android_user_click_on_Save_this_information_checkbox() throws Throwable 
+	{
+	    String vObjSaveAchInfoChkBox = Constants.ANDROIDMentaOR.getProperty("SaveAchInfoChkBox");
+	    Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjSaveAchInfoChkBox));
+	    Assert.assertEquals("PASS", Constants.key.click(vObjSaveAchInfoChkBox));
+	    LogCapture.info("Android user click on Save information checkbox...");
+	}
+	
+	@Then("^android user is on Transfer through Ach screen$")
+	public void android_user_is_on_Transfer_through_Ach_screen() throws Throwable 
+	{
+	    String vObjTransferThroAchScreen = Constants.ANDROIDMentaOR.getProperty("TransferThroAchScreen");
+	    Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjTransferThroAchScreen));
+	    String vTransfertxt = Constants.key.readText(vObjTransferThroAchScreen);
+	    System.out.println(vTransfertxt);
+	    LogCapture.info("Android use is on transferred success screen...");
+	}
+	
+	@Then("^android user land on Debitors account info screen$")
+	public void android_user_land_on_Debitors_account_info_screen() throws Throwable 
+	{
+		String vObjDebitorsAccInfoScreen = Constants.ANDROIDMentaOR.getProperty("DebitorsAccInfoScreen");
+		Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjDebitorsAccInfoScreen));
+		LogCapture.info("Android user is on Debitor's Account Information screen...");
+	}
+	
+	@When("^android user select the added Ach card base on \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void android_user_select_the_added_Ach_card_base_on_and(String cardName, String cardNo) throws Throwable 
+	{
+		try
+		{
+			String vObjAchCardNameList = Constants.ANDROIDMentaOR.getProperty("AchCardNameList");
+			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchCardNameList));
+			
+			int cardListSize = Constants.key.getElementList(vObjAchCardNameList).size();
+			//System.out.println("Card Name List : "+cardListSize);
+			List<MobileElement> lists = Constants.key.getElementList(vObjAchCardNameList);
+			for(int i=0 ; i<cardListSize ; i++)
+			{
+				String val = lists.get(i).getText();
+				//System.out.println(val);
+				
+				if(val.equalsIgnoreCase(cardName))
+				{
+					String vObjAchCardNoList = Constants.ANDROIDMentaOR.getProperty("AchCardNoList");
+					//Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchCardNoList));
+					
+					String vObjAchCardRadioList = Constants.ANDROIDMentaOR.getProperty("AchCardRadioList");
+					//Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchCardRadioList));
+					
+					int cardNoList = Constants.key.getElementList(vObjAchCardNoList).size();
+					System.out.println("Card No List Size : "+cardNoList);
+					List<MobileElement> lists1 = Constants.key.getElementList(vObjAchCardNoList);
+					
+					List<MobileElement> radioList = Constants.key.getElementList(vObjAchCardRadioList);
+					
+					for (int j=0 ; j<cardNoList ; j++)
+					{
+						String val1 = lists1.get(j).getText();
+						//System.out.println(val1);
+						if(val1.equalsIgnoreCase(cardNo))
+						{
+							radioList.get(j).click();
+							break;
+						}
+					}
+					
+				}
+			}			
+			LogCapture.info("Android user selected the Ach card..."+cardName);
+		}
+		
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

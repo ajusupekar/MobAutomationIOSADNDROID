@@ -1,9 +1,9 @@
 Feature: Menta Login Screen
 
-  Background:
-  	Given android menta app is installed on the device and launched successfully
+  Background: 
+    Given android menta app is installed on the device and launched successfully
     When android user clink on the Sign in button
-    Then android user should navigate to menta login screen 
+    Then android user should navigate to menta login screen
 
   @AndroidMenta_1 @AndroidMenta_Sanity
   Scenario Outline: To verify that when user performs login with valid credential then user navigates to menta dashboard screen.
@@ -16,7 +16,7 @@ Feature: Menta Login Screen
       | MentaEmail1  | MentaPass1 |
 
   @AndroidMenta_2 @CA_1 @AndroidMenta_Sanity
-  Scenario Outline: To verify that user should be able to ADD CASH into Menta Checking Account using new card.
+  Scenario Outline: To verify that user should be able to ADD CASH into Menta Checking Account using new Ach card.
     When android user provides menta Username "<emailAddress>" and Password "<password>"
     And android user click on the menta login button
     Then android app should load the menta dashboard screen
@@ -26,28 +26,30 @@ Feature: Menta Login Screen
     When android user click on ADD CASH button
     And android user enters the "<Amount>"
     And android user click on Cash Add button
-    When android user click on Add a card button
-    And android user enters the card number "<CardNumber>"
-    And android user enters the expiry date "<ExpiryDate>"
-    And android user enters the security code "<code>"
-    And android user enters the Zip Code "<ZipCode>"
-    And android user enters the card name "<CardName>"
-    And android user click on Add button
-    When android user select the newly created card
-    And android user click on card Next button
-    And android user enter the security code"<code>"
-    And android user click on Pay button
-    Then android user land on Amount Added into Checking Account screen
+    When android user click on Add Ach button
+    And android user enters the Identification number "<Identification>"
+    And android user enters the Middle Name "<MiddleName>"
+    
+    And android user enters the Ach Zip Code "<AchZipCode>"
+    And android user enters the Ach Country Code "<AchCountryCode>"
+    
+    And android user enters the Debitors Institution Name "<InstitutionName>"
+    And android user enters the Debitors Identification "<DebIdent>"
+    And android user enters the Debitors Institution Identification "<DebI>"
+    And android user enters the Reason "<Reason>"
+    And android user click on Save this information checkbox
+    And android user click on Ach Submit button
+    Then android user is on Transfer through Ach screen
     When android user click on Go To Dashboard button
     Then android user land on Checking Account screen
     Then android user verify Checking Account balance After adding money into Menta Account
 
     Examples: 
-      | emailAddress | password   | Amount | CardNumber       | ExpiryDate | code | ZipCode | CardName |
-      | MentaEmail1  | MentaPass1 |     80 | 4444333322221111 |       1225 |  123 |  451524 | Axis     |
+      | emailAddress | password   | Amount | Identification | MiddleName | AchZipCode | AchCountryCode | InstitutionName | DebIdent | DebI      | Reason |
+      | MentaEmail1  | MentaPass1 |     80 | 123456789      |       mm   |     411035 |         85555  | IDBI            | 22222222 | 101110802 | NewAch |
 
   @AndroidMenta_3 @CA_2 @AndroidMenta_Sanity
-  Scenario Outline: To verify that user should be able to ADD CASH into Menta Checking Account using existing card.
+  Scenario Outline: To verify that user should be able to ADD CASH into Menta Checking Account using existing Ach card.
     When android user provides menta Username "<emailAddress>" and Password "<password>"
     And android user click on the menta login button
     Then android app should load the menta dashboard screen
@@ -57,18 +59,18 @@ Feature: Menta Login Screen
     When android user click on ADD CASH button
     And android user enters the "<Amount>"
     And android user click on Cash Add button
-    When android user select the newly created card
-    And android user click on card Next button
-    And android user enter the security code"<code>"
-    And android user click on Pay button
-    Then android user land on Amount Added into Checking Account screen
+    When android user select the added Ach card base on "<InstitutionName>" and "<DebIdent>"
+    Then android user land on Debitors account info screen
+    When android user enters the Reason "<Reason>"
+    And android user click on Ach Submit button
+    Then android user is on Transfer through Ach screen
     When android user click on Go To Dashboard button
     Then android user land on Checking Account screen
     Then android user verify Checking Account balance After adding money into Menta Account
-
+    
     Examples: 
-      | emailAddress | password   | Amount | code |
-      | MentaEmail1  | MentaPass1 |     20 |  123 |
+      | emailAddress | password   | Amount | InstitutionName | DebIdent | Reason  |
+      | MentaEmail1  | MentaPass1 |     20 | IDBI            | 22222222 | ExisAch |
 
   @AndroidMenta_4 @CA_3 @AndroidMenta_Sanity
   Scenario Outline: To verify that user should be able to add new beneficiary and Send the Money request and refuse the same request.
@@ -102,7 +104,7 @@ Feature: Menta Login Screen
 
     Examples: 
       | emailAddress | password   | Amount | BeneficiaryEmail  | Note             | Email             | Pass             | ReqAmount |
-      | MentaEmail1  | MentaPass1 |      6 | BeneficiaryEmail2 | CARequestNewUser | BeneficiaryEmail2 | BeneficiaryPass2 | $ 6.00    |
+      | MentaEmail1  | MentaPass1 |      1 | BeneficiaryEmail2 | CARequestNewUser | BeneficiaryEmail2 | BeneficiaryPass2 | $  1.00   |
 
   @AndroidMenta_5 @CA_4 @AndroidMenta_Sanity
   Scenario Outline: To verify that user should be able to Send the Money request to added beneficiary and accept the request.
@@ -140,7 +142,7 @@ Feature: Menta Login Screen
 
     Examples: 
       | emailAddress | password   | Amount | BeneficiaryEmail  | Note              | Email             | Pass             | ReqAmount | Pin  |
-      | MentaEmail1  | MentaPass1 |      7 | BeneficiaryEmail2 | CARequestExisUser | BeneficiaryEmail2 | BeneficiaryPass2 | $ 7.00    | 0000 |
+      | MentaEmail1  | MentaPass1 |      2 | BeneficiaryEmail2 | CARequestExisUser | BeneficiaryEmail2 | BeneficiaryPass2 | $  2.00   | 0000 |
 
   @AndroidMenta_6 @Set_Pin @AndroidMenta_Sanity
   Scenario Outline: To verify that user should be able Set the Pin.
@@ -184,7 +186,7 @@ Feature: Menta Login Screen
 
     Examples: 
       | emailAddress | password   | Amount | BeneficiaryEmail  | Note          | Pin  |
-      | MentaEmail1  | MentaPass1 |      8 | BeneficiaryEmail3 | CASendNewUser | 0000 |
+      | MentaEmail1  | MentaPass1 |      3 | BeneficiaryEmail3 | CASendNewUser | 0000 |
 
   @AndroidMenta_8 @CA_6 @AndroidMenta_Sanity
   Scenario Outline: To verify that user should be able to Send the Money to added Menta user or beneficiary from checking account.
@@ -208,7 +210,7 @@ Feature: Menta Login Screen
 
     Examples: 
       | emailAddress | password   | Amount | BeneficiaryEmail  | Note           | Pin  |
-      | MentaEmail1  | MentaPass1 |      9 | BeneficiaryEmail3 | CASendExisUser | 0000 |
+      | MentaEmail1  | MentaPass1 |      4 | BeneficiaryEmail3 | CASendExisUser | 0000 |
 
   @AndroidMenta_9 @RemoveCard @AndroidMenta_Sanity
   Scenario Outline: To verify that user should be able to remove the card.
@@ -653,7 +655,7 @@ Feature: Menta Login Screen
     And android user click on Submit Password button
     Then android user land on Password updated screen
     When android user click on Okay button
-    Then android user land on Enter password screen
+    Then android user land on Enters password screen
 
     Examples: 
       | emailAddress | password   | OldPassword | NewPassword |

@@ -10,7 +10,7 @@ public class TestNGRunner {
 			glue = { "com.cucumber.stepdefinition" },
 			strict = false,
 			dryRun = false,
-				tags = {"@IOSMenta_1"},
+				tags = {"@AndroidMenta_8"},
 					plugin = {
 							"html:target/site/cucumber-pretty","rerun:target/rerun.txt", 
 					"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/Extentreport.html",
