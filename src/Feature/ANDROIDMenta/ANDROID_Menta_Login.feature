@@ -263,14 +263,13 @@ Feature: Menta Login Screen
     When android user click on Go To Dashboard button
     Then android app should load the menta dashboard screen
     When android user click on Pocket Account button
-    Then android user land on Pocket Account screen
     Then android user verify newly added pocket should be displayed on the Pocket Account screen"<PocketName>"
     When android user select the pocket edit option"<PocketName>"
     Then android user verify Pocket Balance After adding the money
 
     Examples: 
       | emailAddress | password   | PocketName | Amount | CardNumber       | ExpiryDate | code | ZipCode | CardName |
-      | MentaEmail1  | MentaPass1 | Trek       |    100 | 4111111111111111 |       1224 |  123 |  411035 | HDFC     |
+      | MentaEmail1  | MentaPass1 | rrrr       |    10  | 4111111111111111 |       1224 |  123 |  411035 | HDFC     |
 
   @AndroidMenta_11 @PA_2 @AndroidMenta_Sanity
   Scenario Outline: To verify that user should be able to create new pocket and add money using menta checking account.
