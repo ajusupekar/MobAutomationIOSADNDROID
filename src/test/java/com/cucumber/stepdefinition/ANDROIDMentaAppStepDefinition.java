@@ -327,6 +327,15 @@ public class ANDROIDMentaAppStepDefinition
 	    }
 	}
 	
+	@When("^android user click on Go To Pocket Dashboard withdraw button$")
+	public void android_user_click_on_Go_To_Pocket_Dashboard_withdraw_button() throws Throwable 
+	{
+		String vObjGoToPocketDashboardWithdrawBtn = Constants.ANDROIDMentaOR.getProperty("GoToPocketDashboardWithdrawBtn");
+    	Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjGoToPocketDashboardWithdrawBtn));
+    	Assert.assertEquals("PASS", Constants.key.click(vObjGoToPocketDashboardWithdrawBtn));
+    	LogCapture.info("Android user clicked on Go To Pocket Dashboard button...");
+	}
+	
 	@Then("^android user land on (add money|card created|withdraw money) screen$")
 	public void android_user_land_on_add_money_screen(String optionValue) throws Throwable 
 	{
@@ -617,13 +626,15 @@ public class ANDROIDMentaAppStepDefinition
 	{
 	    if(optionValue.equalsIgnoreCase("before"))
 	    {
+	    	Constants.key.pause(500);
 	    	String vObjCheckingAccBalance = Constants.ANDROIDMentaOR.getProperty("CheckingAccBalance");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjCheckingAccBalance));
 			String b = Constants.key.readText(vObjCheckingAccBalance);
 			Constants.DataMap.put("Before", b);
 	    }
 	    else if(optionValue.equalsIgnoreCase("After"))
-	    {	    	
+	    {	
+	    	Constants.key.pause(500);
 	    	String vObjCheckingAccBalance = Constants.ANDROIDMentaOR.getProperty("CheckingAccBalance");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjCheckingAccBalance));
 			String a = Constants.key.readText(vObjCheckingAccBalance);
@@ -1122,6 +1133,7 @@ public class ANDROIDMentaAppStepDefinition
 	{
 		if(optionValue.equalsIgnoreCase("Before"))
 		{
+			Constants.key.pause(500);
 			String vObjCABalanceTxt = Constants.ANDROIDMentaOR.getProperty("CABalanceTxt");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjCABalanceTxt));
 			String b = Constants.key.readText(vObjCABalanceTxt);
@@ -1129,6 +1141,7 @@ public class ANDROIDMentaAppStepDefinition
 		}
 		else if(optionValue.equalsIgnoreCase("After"))
 		{
+			Constants.key.pause(500);
 			String vObjCABalanceTxt = Constants.ANDROIDMentaOR.getProperty("CABalanceTxt");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjCABalanceTxt));
 			String a = Constants.key.readText(vObjCABalanceTxt);
@@ -1169,6 +1182,7 @@ public class ANDROIDMentaAppStepDefinition
 	{
 		if(optionValue.equalsIgnoreCase("Before"))
 		{
+			Constants.key.pause(500);
 			String vObjCABalanceTxt = Constants.ANDROIDMentaOR.getProperty("CABalanceTxt");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjCABalanceTxt));
 			String b = Constants.key.readText(vObjCABalanceTxt);
@@ -1176,6 +1190,7 @@ public class ANDROIDMentaAppStepDefinition
 		}
 		else if(optionValue.equalsIgnoreCase("After"))
 		{
+			Constants.key.pause(500);
 			String vObjCABalanceTxt = Constants.ANDROIDMentaOR.getProperty("CABalanceTxt");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjCABalanceTxt));
 			String a = Constants.key.readText(vObjCABalanceTxt);
@@ -1190,6 +1205,7 @@ public class ANDROIDMentaAppStepDefinition
 		String vObjSendBtnCA = Constants.ANDROIDMentaOR.getProperty("SendBtnCA");
 		Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjSendBtnCA));
 		Assert.assertEquals("PASS", Constants.key.click(vObjSendBtnCA));
+		Constants.key.pause(700);
 		LogCapture.info("Android user clicked on Send button...");
 	}
 	
@@ -1507,7 +1523,7 @@ public class ANDROIDMentaAppStepDefinition
 		{
 			String vObjPaybackBtn = Constants.ANDROIDMentaOR.getProperty("PaybackBtn");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjPaybackBtn));
-			Assert.assertEquals("PASS", Constants.key.click(vObjPaybackBtn));
+			Assert.assertEquals("PASS", Constants.key.click(vObjPaybackBtn));			
 			LogCapture.info("Android user clicked on Payback button...");
 		}
 	}
@@ -2135,6 +2151,7 @@ public class ANDROIDMentaAppStepDefinition
 	    String vObjGoToDashboardBtn = Constants.ANDROIDMentaOR.getProperty("GoToDashboardBtn");
 	    Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjGoToDashboardBtn));
 	    Assert.assertEquals("PASS", Constants.key.click(vObjGoToDashboardBtn));
+	    Constants.key.pause(500);
 	    LogCapture.info("Android user clicked on Go To Dashboard button...");	    
 	}
 	
@@ -2268,6 +2285,9 @@ public class ANDROIDMentaAppStepDefinition
 		}
 		else if(optionValue.equalsIgnoreCase("Ach Zip Code"))
 		{
+			String txt = "Country Code";
+			Constants.key.scrollDownUI(txt);
+			
 			String vObjAchZipCodeInput = Constants.ANDROIDMentaOR.getProperty("AchZipCodeInput");
 			Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchZipCodeInput));
 			Assert.assertEquals("PASS", Constants.key.writeInInput(vObjAchZipCodeInput, data));
@@ -2311,6 +2331,8 @@ public class ANDROIDMentaAppStepDefinition
 	@When("^android user enters the Reason \"([^\"]*)\"$")
 	public void android_user_enters_the_Reason(String reason) throws Throwable 
 	{
+		String txt = "Submit";
+		Constants.key.scrollDownUI(txt);
 		String vObjReasonInput = Constants.ANDROIDMentaOR.getProperty("ReasonInput");
 		Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjReasonInput));
 		Assert.assertEquals("PASS", Constants.key.writeInInput(vObjReasonInput, reason));
@@ -2369,7 +2391,7 @@ public class ANDROIDMentaAppStepDefinition
 					//Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjAchCardRadioList));
 					
 					int cardNoList = Constants.key.getElementList(vObjAchCardNoList).size();
-					System.out.println("Card No List Size : "+cardNoList);
+					//System.out.println("Card No List Size : "+cardNoList);
 					List<MobileElement> lists1 = Constants.key.getElementList(vObjAchCardNoList);
 					
 					List<MobileElement> radioList = Constants.key.getElementList(vObjAchCardRadioList);
@@ -2394,6 +2416,15 @@ public class ANDROIDMentaAppStepDefinition
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	@When("^android user click on View Card button$")
+	public void android_user_click_on_View_Card_button() throws Throwable 
+	{
+		String vObjViewCardBtn = Constants.ANDROIDMentaOR.getProperty("ViewCardBtn");
+		Assert.assertEquals("PASS", Constants.key.eleLocatedDisplayed(vObjViewCardBtn));
+		Assert.assertEquals("PASS", Constants.key.click(vObjViewCardBtn));
+		LogCapture.info("Android user clicked on View Card button...");
 	}
 	
 }

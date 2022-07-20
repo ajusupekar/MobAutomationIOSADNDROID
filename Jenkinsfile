@@ -2,6 +2,7 @@ pipeline {
   agent any
   tools {
       jdk "JAVA_HOME"
+      maven "Maven"
   }
   stages {
     stage('Run functional test cases') {

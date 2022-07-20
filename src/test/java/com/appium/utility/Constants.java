@@ -5,7 +5,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
-
+import io.appium.java_client.android.AndroidDriver;
 
 import  java.util.List;
 import java.util.Map;
@@ -14,6 +14,7 @@ public class Constants {
 	public static String JenkinsBrowser = System.getProperty("jenkinsBrowser");
 	public static Reusables key;
 	public static MobileDriver<MobileElement> driver;
+	public static AndroidDriver<MobileElement> androidDriver;
 	public static Properties CONFIG;
 	public static Properties DBCONFIG;
     public static Properties IOSLoginOR;

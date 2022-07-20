@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -31,7 +32,11 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+
 import io.appium.java_client.touch.offset.ElementOption;
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
 
 public class Reusables {
 
@@ -773,6 +778,86 @@ public class Reusables {
 		}
 		return lastFourDigit;
 	}
+	
+	public String scrollToExactElement(String str) throws Exception 
+	{
+        try {
+            Thread.sleep(5000);
+
+            ((AndroidDriver<MobileElement>) Constants.driver).findElementByAndroidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""
+                            + str + "\").instance(0))")
+                    .click();
+        } 
+        catch (Exception e) 
+        {
+            takeSnapShot();
+            return Constants.KEYWORD_FAIL;
+        }
+        return Constants.KEYWORD_PASS;
+    }
+	
+	public String scrollDownUI(String eleText) throws Exception 
+	{
+        try 
+        {
+            Constants.androidDriver = ((AndroidDriver<MobileElement>) Constants.driver);
+            Constants.androidDriver.findElementByAndroidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""
+                            + eleText + "\").instance(0))");
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Unable to locate : " + e.getMessage());
+            takeSnapShot();
+            return Constants.KEYWORD_FAIL;
+        }
+        return Constants.KEYWORD_PASS;
+    }
+	
+	private void scroll(int startX, int startY, int endX, int endY) 
+	{
+		new TouchAction((MobileDriver) Constants.driver).press(point(startX, startY))
+                .waitAction(waitOptions(ofMillis(1000))).moveTo(point(endX, endY)).release().perform();
+    }
+	
+	public String swipeHorizontal(int startPercentage, int finalPercentage, int anchorPercentage) 
+	{
+        try 
+        {
+            Dimension size = Constants.driver.manage().window().getSize();
+            int anchor = (size.height * anchorPercentage) / 100;
+            int startPoint = (size.width * startPercentage) / 100;
+            int endPoint = (size.width * finalPercentage) / 100;
+            scroll(startPoint, anchor, endPoint, anchor);
+            LogCapture.info("Able to swap Horizonatlly....");
+        } 
+        catch (Exception e) 
+        {
+            LogCapture.info("Unable to swipe horizontally");
+            return Constants.KEYWORD_FAIL;
+        }
+        return Constants.KEYWORD_PASS;
+    }
+	
+	public String swipeVertical(int startPercentage, int finalPercentage, int anchorPercentage) 
+	{
+        try 
+        {
+            Dimension size = Constants.driver.manage().window().getSize();
+            int anchor = (size.width * anchorPercentage) / 100;
+            int startPoint = (size.height * startPercentage) / 100;
+            int endPoint = (size.height * finalPercentage) / 100;
+            scroll(anchor, startPoint, anchor, endPoint);
+        } 
+        catch (Exception e) 
+        {
+            LogCapture.info("Unable to swipe verticallys");
+            return Constants.KEYWORD_FAIL;
+        }
+
+        return Constants.KEYWORD_PASS;
+    }
 	
 }
 	

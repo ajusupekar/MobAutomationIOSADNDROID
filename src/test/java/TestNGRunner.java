@@ -10,7 +10,7 @@ public class TestNGRunner {
 			glue = { "com.cucumber.stepdefinition" },
 			strict = false,
 			dryRun = false,
-				tags = {"@AndroidMenta_10"},
+				tags = {"@AndroidMenta_7"},  
 					plugin = {
 							"html:target/site/cucumber-pretty","rerun:target/rerun.txt", 
 					"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/Extentreport.html",
@@ -23,7 +23,7 @@ public class TestNGRunner {
 		public void sendMail() throws Exception  
 		{ 
 			// SendMail.execute("InstallAndTestAppReport.htm");
-			LogCapture.info("Automation test report mail sent.....!!!!!!!!!");			 
+			LogCapture.info("Automation test report mail sent.....!!!!!!!!!");
 		}
 	}
 }
