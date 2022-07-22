@@ -10,11 +10,11 @@ public class TestNGRunner {
 			glue = { "com.cucumber.stepdefinition" },
 			strict = false,
 			dryRun = false,
-				tags = {"@AndroidMenta_7"},  
+				tags = {"@AndroidMenta_1"},  
 					plugin = {
 							"html:target/site/cucumber-pretty","rerun:target/rerun.txt", 
 					"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/Extentreport.html",
-					}, 
+					},
 					//html:target/site/cucumber-pretty", "json:target/cucumber-reports/cucumber.json",
 			monochrome = true)
 	public class TestNGAppRunner extends AbstractTestNGCucumberTests
