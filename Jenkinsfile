@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Run functional test cases') {
       steps {
-       sh "mvn -f pom.xml clean install -DjenkinsBrowser=${params.device} -Dcucumber.options=\"--tags ${params.tagName}\""
+       sh "mvn clean install -DjenkinsBrowser=${params.device} -Dcucumber.options=\"--tags ${params.tagName}\""
       }
     }
   }
