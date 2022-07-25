@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Run functional test cases') {
       steps {
-       mvn -Dmaven.repo.local=/Users/bnt/.m2/repository clean install
+       sh "mvn -Dmaven.repo.local=/Users/bnt/.m2/repository clean install -DjenkinsBrowser=${params.device} -Dcucumber.options=\"--tags ${params.tagName}\""
       }
     }
   }
